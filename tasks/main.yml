@@ -1,0 +1,81 @@
+---
+# tasks file for qemu
+
+# Activation de l'option de virtualisation
+
+# Création du réseau example(192.168.100.0/24)
+# Define a new network
+- virt_net:
+    command: define
+    name: example
+    xml: '{{ lookup("template", "../contents/example.xml.j2") }}'
+
+# Start a network
+- virt_net:
+    command: create
+    name: example
+
+# Ensure that a network is active (needs to be defined and built first)
+- virt_net:
+    state: active
+    name: example
+
+# Ensure that a given network will be started at boot
+- virt_net:
+    autostart: yes
+    name: example
+
+########################################################################
+# Création du réseau satnet(172.31.0.0/16)
+# Define a new network
+- virt_net:
+    command: define
+    name: satnet
+    xml: '{{ lookup("template", "../contents/satnet.xml.j2") }}'
+
+# Start a network
+- virt_net:
+    command: create
+    name: satnet
+
+# Ensure that a network is active (needs to be defined and built first)
+- virt_net:
+    state: active
+    name: satnet
+
+# Ensure that a given network will be started at boot
+- virt_net:
+    autostart: yes
+    name: satnet
+
+########################################################################
+
+
+...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
